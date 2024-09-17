@@ -14,9 +14,9 @@ const App = () => {
     setExpenses(storedExpenses);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-  }, [expenses]);
+  const updateLocalStorage = (newExpenses) => {
+    localStorage.setItem("expenses", JSON.stringify(newExpenses));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,16 +28,18 @@ const App = () => {
 
     const newExpense = { description, amount, date };
 
+    let updatedExpenses;
     if (editingIndex !== null) {
-      const updatedExpenses = expenses.map((expense, index) =>
+      updatedExpenses = expenses.map((expense, index) =>
         index === editingIndex ? newExpense : expense
       );
-      console.log("updated expenses 1----->", updatedExpenses);
-      setExpenses(updatedExpenses);
       setEditingIndex(null);
     } else {
-      setExpenses([...expenses, newExpense]);
+      updatedExpenses = [...expenses, newExpense];
     }
+
+    setExpenses(updatedExpenses);
+    updateLocalStorage(updatedExpenses);
 
     setDescription("");
     setAmount("");
@@ -46,7 +48,6 @@ const App = () => {
 
   const handleEdit = (index) => {
     const expense = expenses[index];
-    console.log("index", index);
     setDescription(expense.description);
     setAmount(expense.amount);
     setDate(expense.date);
@@ -55,16 +56,21 @@ const App = () => {
   };
 
   const handleDelete = (index) => {
-    const updatedExpenses = expenses.filter((_, i) => i !== index);
-    console.log("updated expenses 2----->", updatedExpenses);
+    const updatedExpenses = expenses.filter((expense, i) => {
+      if (i !== index) {
+        return true;
+      } else {
+        return false;
+      }
+    });
     setExpenses(updatedExpenses);
+    updateLocalStorage(updatedExpenses);
   };
 
   const totalAmount = expenses.reduce(
     (sum, expense) => sum + parseFloat(expense.amount),
     0
   );
-  console.log("total amount ---->", totalAmount);
 
   return (
     <div className="container">
