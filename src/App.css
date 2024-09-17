@@ -1,18 +1,91 @@
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px black;
+}
+
 .head-container {
   text-align: center;
+  margin-bottom: 20px;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: orange;
+  color: black;
+}
+
 .expense-item {
   display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.total-container {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: right;
+  padding: 10px;
 }
 
 .edit-button {
   margin-left: 10px;
-  margin-top: 10px;
+  background-color: blue;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
-.span-items {
-  margin-top: 10px;
-  margin-bottom: 10px;
+
+.edit-button:hover {
+  background-color: orange;
+  color: black;
 }
-.total-container {
+
+#expense-list p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#total-amount {
   margin-top: 20px;
+  color: black;
+}
+
+span.span-items {
+  font-size: 16px;
 }
